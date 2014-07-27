@@ -1,0 +1,93 @@
+﻿<Window x:Class="TestPaintProgram.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ComuPaint" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                
+                <MenuItem Header="_Open" Name="menuOpen" Click="menuOpen_Click">
+                    <MenuItem.Icon>
+                        <Image Source="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-document-open-folder-icon.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Header="_Save As" Name="menuSaveAs" Click="menuSaveAs_Click">
+                    <MenuItem.Icon>
+                        <Image Source="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/16/Actions-document-save-icon.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Header="_Close" Name="menuClose" Click="menuClose_Click">
+                    <MenuItem.Icon>
+                        <Image Source="http://icons.iconarchive.com/icons/deleket/sleek-xp-basic/16/Close-2-icon.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Edit"/>
+            <MenuItem Header="_View"/>
+            <MenuItem Header="_Window"/>
+            <MenuItem Header="_Help"/>
+        </Menu>
+        
+        <Grid Grid.Row="1" Background="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" Width="100" Height="27" Margin="10" 
+                    Click="Button_Click_1" DockPanel.Dock="Left">
+                <DockPanel>
+                    <Image HorizontalAlignment="Left" Source="http://icons.iconarchive.com/icons/franksouza183/fs/16/Actions-color-fill-icon.png"/>
+                    <TextBlock VerticalAlignment="Center">Clear</TextBlock>
+                </DockPanel>
+            </Button>
+            
+            <StackPanel Orientation="Horizontal" Grid.Column="3">
+                <Slider Name="sldBrushSize" Minimum="1" Maximum="30" Width="100" 
+                        VerticalAlignment="Center" DockPanel.Dock="Right" 
+                        ValueChanged="sldBrushSize_ValueChanged"/>
+                <DockPanel Width="30" Height="30" Background="White">
+                    <Ellipse Name="ellipseBrushPresenter" Fill="Black" 
+                             Width="{Binding ElementName=sldBrushSize, Path=Value}" 
+                             Height="{Binding ElementName=sldBrushSize, Path=Value}"/>
+                </DockPanel>
+            </StackPanel>
+            
+            <Button Name="btnGenerateRandomColor" Grid.Column="1" Height="30" 
+                    Click="btnGenerateRandomColor_Click">
+                <DockPanel>
+                    <Border Name="borderColorPresenter" Width="25" Height="25" 
+                            Background="Black" Margin="10 0"/>
+                    <TextBlock VerticalAlignment="Center">
+                        Generate Random Color
+                    </TextBlock>
+                </DockPanel>
+            </Button>
+            
+            <ToggleButton Name="btnEraser" Grid.Column="2" Height="30" Width="100" Click="btnEraser_Click">
+                <DockPanel>
+                    <Image Margin="10 0" Height="20" Source="http://icons.iconarchive.com/icons/fatcow/farm-fresh/16/draw-eraser-icon.png"/>
+                    <TextBlock VerticalAlignment="Center">
+                        Eraser
+                    </TextBlock>
+                </DockPanel>
+            </ToggleButton>
+        </Grid>
+        
+        <DockPanel Grid.Row="2">
+            <InkCanvas Name="inkPanel"/>
+        </DockPanel>
+       
+    </Grid>
+</Window>
